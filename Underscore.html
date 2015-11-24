@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Brian Haveri" />
+  <meta name="translator" content="Shuiguang Zheng" />
+  <meta name="description" content="Underscore.php是Underscore.js的PHP移植版" />
+
+  <title>Underscore.php Chinese Translation</title>
+
+  <style type="text/css">
+    body {
+      margin-top: 1.0em;
+      background-color: #f2f2f2;
+      font-family: Helvetica, Arial, FreeSans, san-serif;
+      font-size: 14px;
+      color: #222;
+      line-height: 1.4em;
+    }
+    #container {
+      margin: 0 0 0 50px;
+      width: 800px;
+    }
+    h1 { font-size: 32px; padding: 20px 0 5px 0; margin-left: -5px; }
+    h1 .small { font-size: 0.4em; }
+    h1 a { background: none; color: #222; }
+    h2 { font-size: 24px; font-weight: bold; color: #0d0d0d; margin: 30px 0 5px 0; border-top: 3px solid #ddd; padding-top: 30px; }
+    h3 { font-size: 16px; font-weight: bold; color: #0d0d0d; margin: 20px 0 5px 0; }
+    p { margin: 0 0 10px 0; }
+    a { background: #5A68A5; color: #fff; padding: 5px 5px 2px 5px; text-decoration: none; }
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      a { padding: 2px 5px; }
+    }
+    a:hover { background: #384683; color: #fff; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    pre { color: #666; background: #ddd; padding: 15px; margin: 5px 0; border-left: 5px solid #5A68A5; font-family: Monaco, "Lucida Grande", monospace; }
+    code { font-family: Monaco, "Lucida Grande", monospace; color: #666; margin-left: 15px; }
+    p code, li code { margin: 0; }
+    hr { border: 0; width: 100%; border-bottom: 3px solid #ddd; margin: 20px 0; }
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+    .fade { color: #aaa; }
+    .function { font-size: 20px; }
+    .alias { float: right; color: #666; font-style: italic; }
+    .block { margin-top: 35px; margin-bottom: 2px; }
+    nav p { line-height: 1.8em; }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+
+    <h1><a href="http://github.com/brianhaveri/Underscore.php">Underscore.php</a>
+      <span class="small"> translated by <a href="http://github.com/shuiguang">shuiguang</a></span></h1>
+
+    <nav>
+      <p><a href="http://github.com/brianhaveri/Underscore.php">Underscore.php</a> 是 <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> 的PHP移植版. 除了移植Underscore的绝大部分功能以外, Underscore.php 还包括 <a href="https://github.com/brianhaveri/Underscore.php/tree/master/test">相应的单元测试</a>. Underscore.php 需要PHP版本 >=- 5.3.</p>
+    </nav>
+      
+    <h2>下载地址</h2>
+    <p>
+      您可以从以下链接下载,使用时只需要包含underscore.php即可
+      <a href="http://github.com/brianhaveri/Underscore.php/zipball/master">zip</a> 或
+      <a href="http://github.com/brianhaveri/Underscore.php/tarball/master">tar</a> 格式。
+    </p>
+    
+    <nav>
+      <h2>函数一览列表</h2>
+      <p><a href="#styles">面向对象方式和静态方式</a></p>
+      
+      <h3>集合函数（Arrays or Objects）</h3>
+      <p>
+        <a href="#each">each</a>,
+        <a href="#map">map</a>,
+        <a href="#reduce">reduce</a>,
+        <a href="#reduceRight">reduceRight</a>,
+        <a href="#find">find</a>,
+        <a href="#filter">filter</a>,
+        <a href="#reject">reject</a>,
+        <a href="#all">all</a>,
+        <a href="#any">any</a>,
+        <a href="#includ">includ</a>,
+        <a href="#invoke">invoke</a>,
+        <a href="#pluck">pluck</a>,
+        <a href="#max">max</a>,
+        <a href="#min">min</a>,
+        <a href="#groupBy">groupBy</a>,
+        <a href="#sortBy">sortBy</a>,
+        <a href="#sortedIndex">sortedIndex</a>,
+        <a href="#shuffle">shuffle</a>,
+        <a href="#toArray">toArray</a>,
+        <a href="#size">size</a>
+      </p>
+      
+      <h3>数组函数（Array Functions）</h3>
+      <p>
+        <a href="#first">first</a>,
+        <a href="#initial">initial</a>,
+        <a href="#rest">rest</a>,
+        <a href="#last">last</a>,
+        <a href="#compact">compact</a>,
+        <a href="#flatten">flatten</a>,
+        <a href="#without">without</a>,
+        <a href="#uniq">uniq</a>,
+        <a href="#union">union</a>,
+        <a href="#intersection">intersection</a>,
+        <a href="#difference">difference</a>,
+        <a href="#zip">zip</a>,
+        <a href="#indexOf">indexOf</a>,
+        <a href="#lastIndexOf">lastIndexOf</a>,
+        <a href="#range">range</a></span>
+      </p>
+      
+      <h3>与函数有关的函数（Function (uh, ahem) Functions）</h3>
+      <p>
+        <span class="fade">bind</span>,
+        <span class="fade">bindAll</span>
+        <a href="#memoize">memoize</a>,
+        <span class="fade">delay</span>,
+        <span class="fade">defer</span>,
+        <a href="#throttle">throttle</a>,
+        <span class="fade">debounce</span>,
+        <a href="#once">once</a>,
+        <a href="#after">after</a>,
+        <a href="#wrap">wrap</a>,
+        <a href="#compose">compose</a>
+      </p>
+      
+      <h3>对象函数（Object Functions）</h3>
+      <p>
+        <a href="#keys">keys</a>,
+        <a href="#values">values</a>,
+        <a href="#functions">functions</a>,
+        <a href="#extend">extend</a>,
+        <a href="#defaults">defaults</a>,
+        <a href="#clon">clon</a>,
+        <a href="#tap">tap</a>,
+        <a href="#has">has</a>,
+        <a href="#isEqual">isEqual</a>,
+        <a href="#isEmpty">isEmpty</a>,
+        <span class="fade">isElement</span>,
+        <a href="#isObject">isObject</a>,
+        <a href="#isArray">isArray</a>,
+        <span class="fade">isArguments</span>,
+        <a href="#isFunction">isFunction</a>,
+        <a href="#isString">isString</a>,
+        <a href="#isNumber">isNumber</a>,
+        <a href="#isBoolean">isBoolean</a>,
+        <a href="#isDate">isDate</a>,
+        <span class="fade">isRegExp</span>,
+        <a href="#isNaN">isNaN</a>,
+        <a href="#isNull">isNull</a>,
+        <span class="fade">isUndefined</span>
+      </p>
+      
+      <h3>实用功能（Utility Functions）</h3>
+      <p>
+        <span class="fade">noConflict</span>,
+        <a href="#identity">identity</a>,
+        <a href="#times">times</a>,
+        <a href="#mixin">mixin</a>,
+        <a href="#uniqueId">uniqueId</a>,
+        <a href="#escape">escape</a>,
+        <a href="#template">template</a>
+      </p>
+      
+      <h3>链式语法（Chaining）</h3>
+      <p>
+        <a href="#chain">chain</a>,
+        <a href="#value">value</a>
+      </p>
+      
+      <p class="fade"><i>由于技术上的原因，Underscore.js中的部分函数并未移植到Underscore.php中，也有可能是这些函数并不使用于PHP。</i></p>
+    </nav>
+    
+    <h2>单下划线 vs 双下划线</h2>
+    <p>在PHP的函数库中<code>_</code>是作为gettext函数的别名，从方便记忆的角度，我们使用双下划线<code>__</code>来代替Underscore.js中的单下划线<code>_</code>。</p>
+    
+    <h2 id="styles">面向对象方式 和 静态调用方式</h2>
+    <p>Underscore.php 可以使用面向对象方式或静态方式进行调用，下面这2种方式来操作这组数据得到的结果是一样的。</p>
+    <pre>__::map(array(1, 2, 3), function($n) { return $n * 2; });
+__(array(1, 2, 3))->map(function($n) { return $n * 2; });</pre>
+
+<h2>集合函数 （数组 或对象）</h2>
+<p class="block" id="each"><b class="function">each</b> <code>__::each(collection, iterator)</code></p>
+<p>each函数的第一个参数仍然是集合数组或对象，第二个参数是iterator函数，传递给这个函数参数列表依次是(value, key, collection)，与Underscore.js不同的是，如果需要传递context参数，在PHP中需要使用<code>use</code>申明来引入。另外，PHP中的<code>foreach</code>是保留字，所以each没有别名函数（<code>forEach</code>）。</p>
+<pre>__::each(array(1, 2, 3), function($num) { echo $num . ','; }); // 1,2,3,
+
+$multiplier = 2;
+__::each(array(1, 2, 3), function($num, $index) use ($multiplier) {
+  echo $index . '=' . ($num * $multiplier) . ',';
+});
+// 0=2,1=4,2=6,</pre>
+
+<p class="block" id="map"><b class="function">map</b> <code>__::map(collection, iterator)</code> <span class="alias">别名: <b>collect</b></span></p>
+<p>通过转换函数(iterator迭代器)映射列表中的每个值产生价值的新数组。传递给这个函数参数列表依次是(value, key, collection)。与Underscore.js不同的是，如果需要传递context参数，在PHP中需要使用<code>use</code>申明来引入。</p>
+<pre>__::map(array(1, 2, 3), function($num) { return $num * 3; }); // array(3, 6, 9)
+
+__::map(array('one'=>1, 'two'=>2, 'three'=>3), function($num, $key) {
+  return $num * 3;
+});
+// array(3, 6, 9);
+</pre>
+
+<p class="block" id="reduce"><b class="function">reduce</b> <code>__::reduce(collection, iterator, memo)</code> <span class="alias">别名: <b>inject, foldl</b></span></p>
+<p>把collection中元素归结为一个单独的数值Reduce the collection into a single value。Memo是reduce函数的初始值，reduce的每一步都需要由iterator返回。与Underscore.js不同的是，如果需要传递context参数，在PHP中需要使用<code>use</code>申明来引入。</p>
+<pre>__::reduce(array(1, 2, 3), function($memo, $num) { return $memo + $num; }, 0); // 6</pre>
+
+<p class="block" id="reduceRight"><b class="function">reduceRight</b> <code>__::reduceRight(collection, iterator, memo)</code> <span class="alias">别名: <b>foldr</b></span></p>
+<p>是从右侧开始组合的元素的reduce函数。</p>
+<pre>$list = array(array(0, 1), array(2, 3), array(4, 5));
+$flat = __::reduceRight($list, function($a, $b) { return array_merge($a, $b); }, array());
+// array(4, 5, 2, 3, 0, 1)</pre>
+
+<p class="block" id="find"><b class="function">find</b> <code>__::find(collection, iterator)</code> <span class="alias">别名: <b>detect</b></span></p>
+<p>在list中逐项查找，返回第一个通过（predicate迭代函数）真值检测的元素值，如果没有值传递给测试迭代器将返回false。 如果找到匹配的元素，函数将立即返回这个元素，不会遍历整个list。</p>
+<pre>__::find(array(1, 2, 3, 4), function($num) { return $num % 2 === 0; }); // 2</pre>
+
+<p class="block" id="filter"><b class="function">filter</b> <code>__::filter(collection, iterator)</code> <span class="alias">别名: <b>select</b></span></p>
+<p>遍历list中的每个值，返回包含所有通过（predicate迭代函数）真值检测的元素值。该方法将会遍历整个list，然后返回满足要求的元素的数组，如果所有元素都不满足则返回空数组。</p>
+<pre>__::filter(array(1, 2, 3, 4), function($num) { return $num % 2 === 0; }); // array(2, 4)</pre>
+
+<p class="block" id="reject"><b class="function">reject</b> <code>__::reject(collection, iterator)</code></p>
+<p>返回list中没有通过（predicate迭代函数）真值检测的元素集合，与filter相反。</p>
+<pre>__::reject(array(1, 2, 3, 4), function($num) { return $num % 2 === 0; }); // array(1, 3)</pre>
+
+<p class="block" id="all"><b class="function">all</b> <code>__::all(collection, iterator)</code></p>
+<p>如果list中的所有元素都通过（predicate迭代函数）的真值检测就返回true。</p>
+<pre>__::all(array(1, 2, 3, 4), function($num) { return $num % 2 === 0; }); // false
+__::all(array(1, 2, 3, 4), function($num) { return $num < 5; }); // true</pre>
+
+<p class="block" id="any"><b class="function">any</b> <code>__::any(collection, iterator)</code></p>
+<p>如果list中有任何一个元素通过（predicate迭代函数）的真值检测就返回true。该方法不会遍历整个list。</p>
+<pre>__::any(array(1, 2, 3, 4), function($num) { return $num % 2 === 0; }); // true
+__::any(array(1, 2, 3, 4), function($num) { return $num === 5; }); // false</pre>
+
+<p class="block" id="includ"><b class="function">includ</b> <code>__::includ(collection, value)</code> <span class="alias">别名: <b>contains</b></span></p>
+<p>如果list包含指定的value则返回true（使用===检测）. 在 Underscore.js 中的 'include' 被改名为 'includ', 因为 'include' 是PHP的保留字。</p>
+<pre>__::includ(array(1, 2, 3), 3); // true</pre>
+
+<p class="block" id="invoke"><b class="function">invoke</b> <code>__::invoke(collection, functionName)</code></p>
+<p>在list的每个元素上执行functionName方法并返回执行完functionName后的list副本。</p>
+<pre>__::invoke(array(' foo', ' bar '), 'trim'); // array('foo', 'bar')</pre>
+
+<p class="block" id="pluck"><b class="function">pluck</b> <code>__::pluck(collection, propertyName)</code></p>
+<p>萃取数组对象中某属性值，返回一个数组</p>
+<pre>$stooges = array(
+  array('name'=>'moe', 'age'=>40),
+  array('name'=>'larry', 'age'=>50),
+  array('name'=>'curly', 'age'=>60)
+);
+__::pluck($stooges, 'name'); // array('moe', 'larry', 'curly')</pre>
+
+<p class="block" id="max"><b class="function">max</b> <code>__::max(collection, [iterator])</code></p>
+<p>返回list中的最大值。如果传递iterator参数，iterator将作为list中每个值的排序依据。如果list为空将会报错，所以你可能需要事先用isEmpty检查 list ，所以你可能需要事先用isEmpty检查 list。与Underscore.js不同的是，如果需要传递context参数，在PHP中需要使用<code>use</code>申明来引入。</p>
+<pre>$stooges = array(
+  array('name'=>'moe', 'age'=>40),
+  array('name'=>'larry', 'age'=>50),
+  array('name'=>'curly', 'age'=>60)
+);
+__::max($stooges, function($stooge) { return $stooge['age']; });
+// array('name'=>'curly', 'age'=>60)</pre>
+
+<p class="block" id="min"><b class="function">min</b> <code>__::min(collection, [iterator])</code></p>
+<p>返回list中的最小值。如果传递iterator参数，iterator将作为list中每个值的排序依据。如果list为空将会报错，所以你可能需要事先用isEmpty检查 list ，与Underscore.js不同的是，如果需要传递context参数，在PHP中需要使用<code>use</code>申明来引入。</p>
+<pre>$stooges = array(
+  array('name'=>'moe', 'age'=>40),
+  array('name'=>'larry', 'age'=>50),
+  array('name'=>'curly', 'age'=>60)
+);
+__::min($stooges, function($stooge) { return $stooge['age']; });
+// array('name'=>'moe', 'age'=>40)</pre>
+
+<p class="block" id="groupBy"><b class="function">groupBy</b> <code>__::groupBy(collection, iterator)</code></p>
+<p>把一个集合分组为多个集合，通过 iterator 返回的结果进行分组. 如果 iterator 是一个字符串而不是函数, 那么将使用 iterator 作为各元素的属性名来对比进行分组。</p>
+<pre>__::groupBy(array(1, 2, 3, 4, 5), function($n) { return $n % 2; });
+// array(0=>array(2, 4), 1=>array(1, 3, 5))
+
+$values = array(
+  array('name'=>'Apple',   'grp'=>'a'),
+  array('name'=>'Bacon',   'grp'=>'b'),
+  array('name'=>'Avocado', 'grp'=>'a')
+);
+__::groupBy($values, 'grp');
+//array(
+//  'a'=>array(
+//    array('name'=>'Apple',   'grp'=>'a'),
+//    array('name'=>'Avocado', 'grp'=>'a')
+//  ),
+//  'b'=>array(
+//    array('name'=>'Bacon',   'grp'=>'b')
+//  )
+//);</pre>
+
+<p class="block" id="sortBy"><b class="function">sortBy</b> <code>__::sortBy(collection, iterator)</code></p>
+<p>返回一个排序后的list拷贝副本。如果传递iterator参数，iterator将作为list中每个值的排序依据。与Underscore.js不同的是，如果需要传递context参数，在PHP中需要使用<code>use</code>申明来引入。</p>
+<pre>__::sortBy(array(1, 2, 3), function($n) { return -$n; }); // array(3, 2, 1)</pre>
+
+<p class="block" id="sortedIndex"><b class="function">sortedIndex</b> <code>__::sortedIndex(collection, value, [iterator])</code></p>
+<p>返回value插入一个有序list中的索引位置。</p>
+<pre>__::sortedIndex(array(10, 20, 30, 40), 35); // 3</pre>
+
+<p class="block" id="shuffle"><b class="function">shuffle</b> <code>__::shuffle(collection)</code></p>
+<p>返回一个打乱顺序后的list拷贝副本。</p>
+<pre>__::shuffle(array(10, 20, 30, 40)); // 30, 20, 40, 10</pre>
+
+<p class="block" id="toArray"><b class="function">toArray</b> <code>__::toArray(collection)</code></p>
+<p>把list(任何可以迭代的对象)转换成一个数组，在转换 arguments 对象时非常有用。</p>
+<pre>$stooge = new StdClass;
+$stooge->name = 'moe';
+$stooge->age = 40;
+__::toArray($stooge); // array('name'=>'moe', 'age'=>40)</pre>
+
+<p class="block" id="size"><b class="function">size</b> <code>__::size(collection)</code></p>
+<p>返回list的长度。</p>
+<pre>$stooge = new StdClass;
+$stooge->name = 'moe';
+$stooge->age = 40;
+__::size($stooge); // 2</pre>
+
+
+<h2>Arrays</h2>
+<p class="block" id="first"><b class="function">first</b> <code>__::first(array, [n])</code> <span class="alias">别名: <b>head</b></span></p>
+<p>返回array（数组）的第一个元素。传递 n 参数将返回数组中从第一个元素开始的前n个元素。</p>
+<pre>__::first(array(5, 4, 3, 2, 1)); // 5
+__::first(array(5, 4, 3, 2, 1), 3); // array(5, 4, 3)</pre>
+
+<p class="block" id="initial"><b class="function">initial</b> <code>__::initial(array, [n])</code></span></p>
+<p>返回数组中除了最后一个元素外的其他全部元素，在arguments对象上特别有用。传递 n 参数将排除数组后面的 n 个元素。</p>
+<pre>__::initial(array(5, 4, 3, 2, 1)); // array(5, 4, 3, 2)
+__::initial(array(5, 4, 3, 2, 1), 3); // array(5, 4)</pre>
+
+<p class="block" id="rest"><b class="function">rest</b> <code>__::rest(array, [index])</code> <span class="alias">别名: <b>tail</b></span></p>
+<p>返回数组中除了第一个元素外的其他全部元素。传递 index 参数将返回从index开始的剩余所有元素。在转换 arguments 对象时非常有用。</p>
+<pre>__::rest(array(5, 4, 3, 2, 1)); // array(4, 3, 2, 1)</pre>
+
+<p class="block" id="last"><b class="function">last</b> <code>__::last(array, [n])</code></p>
+<p>返回数组的最后一个元素， 传递 n 参数将返回数组后面的 n 个元素。</p>
+<pre>__::last(array(5, 4, 3, 2, 1)); // 1
+__::last(array(5, 4, 3, 2, 1), 2); // array(2, 1)</pre>
+
+<p class="block" id="compact"><b class="function">compact</b> <code>__::compact(array)</code></p>
+<p>返回一个除去所有false值的 array副本。 在php中, false, null, 0, "", array() 都是false值.</p>
+<pre>__::compact(array(false, true, 'a', 0, 1, '')); // array(true, 'a', 1)</pre>
+
+<p class="block" id="flatten"><b class="function">flatten</b> <code>__::flatten(array, [shallow])</code></p>
+<p>将一个嵌套多层的数组 array（数组） (嵌套可以是任何层数)转换为只有一层的数组。 如果你传递 shallow参数，数组将只减少一维的嵌套。</p>
+<pre>__::flatten(array(1, array(2), array(3, array(array(array(4))))));
+// array(1, 2, 3, 4)
+
+__::flatten(array(1, array(2), array(3, array(array(array(4))))), true);
+// array(1, 2, 3, array(array(4)))
+</pre>
+
+<p class="block" id="without"><b class="function">without</b> <code>__::without(array, [*values])</code></p>
+<p>返回一个删除所有<b>values</b>值后的 array副本 （使用===检测），并保持索引关系。</p>
+<pre>__::without(array(5, 4, 3, 2, 1), 3, 2); // array(5, 4, 4=>1)</pre>
+
+<p class="block" id="uniq"><b class="function">uniq</b> <code>__::uniq(array, [isSorted [, iterator]])</code> <span class="alias">别名: <b>unique</b></span></p>
+<p>返回 array去重后的副本。与Underscore.js不同的是，如果需要传递context参数，在PHP中即使传递<code>isSorted</code>参数依然无法使用更快的算法。你可以传递 iterator 函数来计算该元素的唯一属性作为比对标准。</p>
+<pre>__::uniq(array(2, 2, 4, 4, 4, 1, 1, 1)); // array(2, 4, 1)</pre>
+
+<p class="block" id="union"><b class="function">union</b> <code>__::union(*arrays)</code></p>
+<p>返回1个或多个数组合并的结果。</p>
+<pre>$arr1 = array(1, 2, 3);
+$arr2 = array(101, 2, 1, 10);
+$arr3 = array(2, 1);
+__::union($arr1, $arr2, $arr3); // array(1, 2, 3, 101, 10)</pre>
+
+<p class="block" id="intersection"><b class="function">intersection</b> <code>__::intersection(*arrays)</code></p>
+<p>返回所有参数数组的交集组成的数组，结果中每个值存在于传入的每个数组里。</p>
+<pre>$arr1 = array(0, 1, 2, 3);
+$arr2 = array(1, 2, 3, 4);
+$arr3 = array(2, 3, 4, 5);
+__::intersection($arr1, $arr2, $arr3); // array(2, 3)</pre>
+
+<p class="block" id="difference"><b class="function">difference</b> <code>__::difference(array, *others)</code></p>
+<p>返回存在于第一个数组但不存在与其他参数数组的元素组成的数组。</p>
+<pre>__::difference(array(1, 2, 3, 4, 5), array(5, 2, 10)); // array(1, 3, 4)</pre>
+
+<p class="block" id="zip"><b class="function">zip</b> <code>__::zip(*arrays)</code></p>
+<p>将数组按照比例进行打包后返回大数组</p>
+<pre>$names = array('moe', 'larry', 'curly');
+$ages = array(30, 40, 50);
+$leaders = array(true, false, false);
+
+__::zip($names, $ages, $leaders);
+// array(
+//   array('moe', 30, true),
+//   array('larry', 40, false),
+//   array('curly', 50, false)
+// )</pre>
+
+<p class="block" id="indexOf"><b class="function">indexOf</b> <code>__::indexOf(array, value)</code></p>
+<p>返回value在array中第一次匹配的索引位置，如果没有匹配则返回-1，和Underscore.js不同的是php中不提供是否排序的参数。</p>
+<pre>__::indexOf(array(1, 2, 3, 2, 2), 2); // 1</pre>
+
+<p class="block" id="lastIndexOf"><b class="function">lastIndexOf</b> <code>__::lastIndexOf(array, value)</code></p>
+<p>返回value在array中最后一次匹配的索引位置，如果没有匹配则返回-1，</p>
+<pre>__::lastIndexOf(array(1, 2, 3, 2, 2), 2); // 4</pre>
+
+<p class="block" id="range"><b class="function">range</b> <code>__::range([start], stop, [step])</code></p>
+<p>创建一个数组，第一个参数start为数组的起始值（如果不传默认为0），第二个参数stop为数组的结束值。第三个参数为递增的步长（如果不传则默认为1），如果步长为负数，将会被认为是负增长。和Underscore.js不同的是如果stop在start的前面，是负增长而不是零长度。</p>
+<pre>__::range(10);         // array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+__::range(1, 5);       // array(1, 2, 3, 4)
+__::range(0, 30, 5);   // array(0, 5, 10, 15, 20, 25)
+__::range(0, -5, -1);  // array(0, -1, -2, -3, -4)
+__::range(0);          // array()
+__::range(15, 10, 1);  // array(15, 14, 13, 12, 11)</pre>
+
+<h2>Functions</h2>
+<p class="block" id="memoize"><b class="function">memoize</b> <code>__::memoize(function, [hashFunction])</code></p>
+<p>Memoizes方法可以缓存某函数的计算结果。对于耗时较长的计算是很有帮助的。如果传递了 hashFunction 参数，就用 hashFunction 的返回值作为key存储函数的计算结果。</p>
+<pre>$fibonacci = function($n) use (&$fibonacci) {
+  return $n < 2 ? $n : $fibonacci($n - 1) + $fibonacci($n - 2);
+};
+$fastFibonacci = __::memoize($fibonacci);
+呵呵,这个还真不会用！
+</pre>
+
+<p class="block" id="throttle"><b class="function">throttle</b> <code>__::throttle(function, wait)</code></p>
+<p>创建并返回一个像节流阀一样的函数，当重复调用函数的时候，至少每隔<b>wait</b>毫秒调用一次该函数。</p>
+<pre>$func = function() { return 'x'; }
+$test = __::throttle($func, 1000);
+//第一次调用时立即返回
+$result = $test();
+var_dump($result);
+//如果你不延时将会返回null,只有休眠一段时间后才会正常
+usleep(1100000);
+//重复调用时将会启用节流阀
+$result = $test();
+var_dump($result);</pre>
+
+<p class="block" id="once"><b class="function">once</b> <code>__::once(function)</code></p>
+<p>创建一个只能被调用一次的函数，第一次后面的重复调用无效。</p>
+<pre>$num = 0;
+$increment = __::once(function() use (&$num) { return $num++; });
+$increment();
+$increment();
+echo $num; // 1</pre>
+
+<p class="block" id="after"><b class="function">after</b> <code>__::after(count, function)</code></p>
+<p>创建一个只有被调用了<b>count</b>次后才会运行的函数，第<b>count</b>次之前的调用无效。</p>
+<pre>$func = __::after(3, function() { return 'x'; });
+$func(); //
+$func(); //
+$func(); // 'x'</pre>
+
+<p class="block" id="wrap"><b class="function">wrap</b> <code>__::wrap(function, wrapper)</code></p>
+<p>将第一个函数 function 封装到函数 wrapper 里面, 并把函数 function 作为第一个参数传给 wrapper. 这样可以让wrapper 在 function 运行之前和之后 执行代码, 调整参数然后附有条件地执行。</p>
+<pre>$hello = function($name) { return 'hello: ' . $name; };
+$hi = __::wrap($hello, function($func) {
+  return 'before, ' . $func('moe') . ', after'; 
+});
+$hi(); // 'before, hello: moe, after'</pre>
+
+<p class="block" id="compose"><b class="function">compose</b> <code>__::compose(*functions)</code></p>
+<p>返回函数集 functions 组合后的复合函数, 也就是一个函数执行完之后把返回的结果再作为参数赋给下一个函数来执行. 以此类推. 在数学里, 把函数 f(), g(), 和 h() 组合起来可以得到复合函数 f(g(h()))。</p>
+<pre>$greet = function($name) { return 'hi: ' . $name; };
+$exclaim = function($statement) { return $statement . '!'; };
+$welcome = __::compose($exclaim, $greet);
+$welcome('moe'); // 'hi: moe!'</pre>
+
+
+<h2>对象函数（Object Functions）</h2>
+<p class="block" id="keys"><b class="function">keys</b> <code>__::keys(object)</code></p>
+<p>返回对象的所有键名组成的数组</p>
+<pre>__::keys((object) array('name'=>'moe', 'age'=>40)); // array('name', 'age')</pre>
+
+<p class="block" id="values"><b class="function">values</b> <code>__::values(object)</code></p>
+<p>返回对象的所有值组成的数组</p>
+<pre>__::values((object) array('name'=>'moe', 'age'=>40)); // array('moe', 40)</pre>
+
+<p class="block" id="functions"><b class="function">functions</b> <code>__::functions(object)</code> <span class="alias">别名: <b>methods</b></span></p>
+<p>返回对象的所有函数/方法名组成的数组</p>
+<pre>
+class Stooge {
+  public function getName() { return 'moe'; }
+  public function getAge() { return 40; }
+}
+$stooge = new Stooge;
+__::functions($stooge); // array('getName', 'getAge')</pre>
+
+<p class="block" id="extend"><b class="function">extend</b> <code>__::extend(destination, *sources)</code></p>
+<p>将<b>源</b>对象的所有属性值拷贝到<b>目标</b>对象，如果目标对象中已经存在源对象中已有属性值，将会覆盖掉目标对象的属性值。注：源对象可以传递多个参数，右侧参数拥有覆盖左侧参数的权利。</p>
+<pre>__::extend((object) array('name'=>'moe'), (object) array('age'=>50));
+// (object) array('name'=>'moe', 'age'=>50)</pre>
+
+<p class="block" id="defaults"><b class="function">defaults</b> <code>__::defaults(object, *defaults)</code></p>
+<p>将defaults对象中的属性值填充到目标对象中，如果目标对象中已经存在defaults对象中已有属性值，将不会覆盖掉目标对象的属性值。注：defaults对象可以传递多个参数，右侧参数没有覆盖左侧参数的权利。</p>
+<pre>$food = (object) array('dairy'=>'cheese');
+$defaults = (object) array('meat'=>'bacon');
+__::defaults($food, $defaults); // (object) array('dairy'=>'cheese', 'meat'=>'bacon');</pre>
+
+<p class="block" id="clon"><b class="function">clon</b> <code>__::clon(object)</code></p>
+<p>返回对象的一个拷贝副本。和Underscore.js不同的是，'clone'在php是一个保留字，所以这里使用clon来代替，</p>
+<pre>$stooge = (object) array('name'=>'moe');
+__::clon($stooge); // (object) array('name'=>'moe');</pre>
+
+<p class="block" id="tap"><b class="function">tap</b> <code>__::tap(object, interceptor)</code></p>
+<p>用 <b>object</b> 作为参数来调用函数 <b>interceptor</b> ，然后返回object。</p>
+<pre>$interceptor = function($obj) { return $obj * 2; };
+__::chain(array(1, 2, 3))->max()
+                         ->tap($interceptor)
+                         ->value(); // 6</pre>
+
+<p class="block" id="has"><b class="function">has</b> <code>__::has(object, key)</code></p>
+<p>返回某个对象是否含有该键名</p>
+<pre>__::has((object) array('a'=>1, 'b'=>2, 'c'=>3), 'b'); // true</pre>
+
+<p class="block" id="isEqual"><b class="function">isEqual</b> <code>__::isEqual(object, other)</code></p>
+<p>检测2个对象是否相同，使用===检测。</p>
+<pre>$stooge = (object) array('name'=>'moe');
+$clon = __::clon($stooge);
+$stooge === $clon; // false
+__::isEqual($stooge, $clon); // true</pre>
+
+<p class="block" id="isEmpty"><b class="function">isEmpty</b> <code>__::isEmpty(object)</code></p>
+<p>检测某个<b>对象</b>是否含有某个值。</p>
+<pre>$stooge = (object) array('name'=>'moe');
+__::isEmpty($stooge); // false
+__::isEmpty(new StdClass); // true
+__::isEmpty((object) array()); // true</pre>
+
+<p class="block" id="isObject"><b class="function">isObject</b> <code>__::isObject(object)</code></p>
+<p>如果参数为对象则返回true。</p>
+<pre>__::isObject((object) array(1, 2)); // true
+__::isObject(new StdClass); // true</pre>
+
+<p class="block" id="isArray"><b class="function">isArray</b> <code>__::isArray(object)</code></p>
+<p>如果参数为数组则返回true。</p>
+<pre>__::isArray(array(1, 2)); // true
+__::isArray((object) array(1, 2)); // false</pre>
+
+<p class="block" id="isFunction"><b class="function">isFunction</b> <code>__::isFunction(object)</code></p>
+<p>如果参数为函数则返回true。</p>
+<pre>__::isFunction(function() {}); // true
+__::isFunction('trim'); // false</pre>
+
+<p class="block" id="isString"><b class="function">isString</b> <code>__::isString(object)</code></p>
+<p>如果参数为字符串则返回true。</p>
+<pre>__::isString('moe'); // true
+__::isString(''); // true</pre>
+
+<p class="block" id="isNumber"><b class="function">isNumber</b> <code>__::isNumber(object)</code></p>
+<p>如果参数为数字则返回true。</p>
+<pre>__::isNumber(1); // true
+__::isNumber(2.5); // true
+__::isNumber('5'); // false</pre>
+
+<p class="block" id="isBoolean"><b class="function">isBoolean</b> <code>__::isBoolean(object)</code></p>
+<p>如果参数为布尔值则返回true。</p>
+<pre>__::isBoolean(null); // false
+__::isBoolean(true); // true
+__::isBoolean(0); // false</pre>
+
+<p class="block" id="isDate"><b class="function">isDate</b> <code>__::isDate(object)</code></p>
+<p>如果参数为DateTime对象则返回true。</p>
+<pre>__::isDate(null); // false
+__::isDate('2011-06-09 01:02:03'); // false
+__::isDate(new DateTime); // true</pre>
+
+<p class="block" id="isNaN"><b class="function">isNaN</b> <code>__::isNaN(object)</code></p>
+<p>如果参数为NaN则返回true。</p>
+<pre>__::isNaN(null); // false
+__::isNaN(acos(8)); // true</pre>
+
+<p class="block" id="isNull"><b class="function">isNull</b> <code>__::isNull(object)</code></p>
+<p>如果参数为NULL则返回true。</p>
+<pre>__::isNull(null); // true
+__::isNull(false); // false</pre>
+
+
+<h2>实用功能（Utility Functions）</h2>
+<p class="block" id="identity"><b class="function">identity</b> <code>__::identity(value)</code></p>
+<p>返回与传入参数相等的值. 相当于数学里的: f(x) = x</p>
+<pre>$moe = array('name'=>'moe');
+$moe === __::identity($moe); // true</pre>
+
+<p class="block" id="times"><b class="function">times</b> <code>__::times(n, iterator)</code></p>
+<p>调用给定的<b>迭代</b> 函数 <b>n</b> 次。</p>
+<pre>__::times(3, function() { echo 'a'; }); // 'aaa'</pre>
+
+<p class="block" id="mixin"><b class="function">mixin</b> <code>__::mixin(array)</code></p>
+<p>通过自己的函数函数扩展Underscore.php，传入键值对即可。</p>
+<pre>__::mixin(array(
+  'capitalize'=> function($string) { return ucwords($string); },
+  'yell'      => function($string) { return strtoupper($string); }
+));
+__::capitalize('moe'); // 'Moe'
+__::yell('moe');       // 'MOE'</pre>
+
+<p class="block" id="uniqueId"><b class="function">uniqueId</b> <code>__::uniqueId([prefix])</code></p>
+<p>创建一个全局唯一的id，如果存在 <b>prefix</b> 参数则作使用$prefix_作为前缀。</p>
+<pre>__::uniqueId(); // 0
+__::uniqueId('stooge_'); // 'stooge_1'
+__::uniqueId(); // 2</pre>
+
+<p class="block" id="escape"><b class="function">escape</b> <code>__::escape(html)</code></p>
+<p>转义HTML字符串，替换<code>&</code>, <code><</code>, <code>></code>, <code>"</code>, <code>'</code>, 和 <code>/</code> 字符。</p>
+<pre>__::escape('Curly, Larry & Moe'); // 'Curly, Larry &amp;amp; Moe'</pre>
+
+<p class="block" id="template"><b class="function">template</b> <code>__::template(templateString, [context])</code></p>
+<p>将php模板编译为可以执行的php代码，也可以用执行任意的php代码。</p>
+<pre>$compiled = __::template('hello: <%= $name %>');
+$compiled(array('name'=>'moe')); // 'hello: moe'
+
+$list = '<% __::each($people, function($name) { %> &lt;li&gt;<%= $name %>&lt;/li&gt; <% }); %>';
+__::template($list, array('people'=>array('moe', 'curly', 'larry')));
+// '&lt;li&gt;moe&lt;/li&gt;&lt;li&gt;curly&lt;/li&gt;&lt;li&gt;larry&lt;/li&gt;'</pre>
+
+<h3>选择单引号 vs. 选择双引号</h3>
+<p>注意: 如果你的模板变量包含有变量，请使用单引号将其包起来，如果使用双引号将会导致变量提前被编译为变量值导致模板失效。</p>
+<pre>// 正确
+$compiled = __::template('hello: <%= $name %>');
+
+// 错误
+$compiled = __::template("hello: <%= $name %>");</pre>
+
+<h3>自定义模板分隔符</h3>
+<p>您可以使用__::templateSettings()并配置interpolate参数自定义模板分隔符。</p>
+<pre>
+// Mustache style 
+__::templateSettings(array(
+  'interpolate' => '/\{\{(.+?)\}\}/'
+));
+
+$mustache = __::template('Hello {{$planet}}!');
+$mustache(array('planet'=>'World')); // "Hello World!"</pre>
+
+
+<h2>链式语法(Chaining)</h2>
+<p class="block" id="chain"><b class="function">chain</b> <code>__::chain(item)</code></p>
+<p>返回一个包装器对象，每次调用其方法将会返回对象自身，直到调用<code>value()</code>时才会返回调用结果。</p>
+<pre>// 筛选并翻转数字的顺序
+$numbers = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+$result = __::chain($numbers)->select(function($n) { return $n < 5; })
+                             ->reject(function($n) { return $n === 3; })
+                             ->sortBy(function($n) { return -$n; })
+                             ->value(); // array(4, 2, 1)</pre>
+
+<p class="block" id="value"><b class="function">value</b> <code>__(obj)->value()</code></p>
+<p>获取封装对象的最终值。</p>
+<pre>__(array(1, 2, 3))->value(); // array(1, 2, 3)</pre>
+
+<h2 id="changelog">更新日志</h2>
+<p>Underscore.php 版本号与 Underscore.js 一一对应</p>
+<h3>1.3.1 &mdash; Jan. 31, 2012</h3>
+<ul>
+  <li>新增 <code>has()</code></li>
+  <li>新增 <code>collect()</code> as an alias to <code>map()</code></li>
+</ul>  
+
+<h3>1.2.4 &mdash; Jan. 8, 2012</h3>
+<p>为了配合Underscore.js，从1.0版本直接过渡到1.2.4版本</p>
+<ul>
+  <li>新增 <code>escape()</code></li>
+  <li>新增 <code>initial()</code></li>
+  <li>新增 <code>shuffle()</code></li>
+  <li><code>difference()</code> 现在可以接受2个以上的参数了</li>
+  <li><code>clon()</code> 可与处理php非对象的参数</li>
+  <li><code>last()</code> 可以传递第二个参数n以获取最后n个元素</li>
+  <li><code>template()</code> 现在支持escape语法</li>
+  <li>新增 <code>flatten()</code> 的第二个参数<code>shallow</code> 只减小一个维度</li>
+  <li>新增 <code>detect()</code> 的别名————<code>find()</code>，新增<code>filter()</code>的别名————<code>select()</code></li>
+  <li><code>after(0, callback)</code> 支持立即出发回调函数</li>
+  <li><code>groupBy</code> accepts both iterators and property keys: <code>groupBy(collection, 'property')</code></li>
+  <li>新增允许使用静态方法调用<code>chain()</code>: <code>__::chain($item)</code></li>
+</ul>
+
+<h3>1.0 &mdash; Aug. 6, 2011</h3>
+<p>第一个版本发布</p>
+
+<h2 id="author">作者</h2>
+<p>Brian Haveri <a href="https://github.com/brianhaveri/">GitHub</a>, <a href="http://twitter.com/brianhaveri">@brianhaveri</a></p>
+
+<h2 id="translator">中文版译者</h2>
+<p>Shuiguang Zheng <a href="https://github.com/shuiguang/">GitHub</a>, <a href="http://blog.zhengshuiguang.com">@Shuiguang Zheng</a></p>
+
+<h3 id="credit">感谢</h3>
+<p>Thanks to Jeremy Ashkenas and all contributors to Underscore.js.</p>
+<p>感谢愚人码头以及各位为Underscore.js提供中文翻译的小伙伴们。</p>
+</div>
+
+<script type="text/javascript">
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
+</html>
